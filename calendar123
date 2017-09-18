@@ -1,0 +1,57 @@
+import socket
+ 
+host = '192.168.0.13'
+port = 3210
+ 
+client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+client_socket.connect((host,port))
+ 
+print('Conect to calendar')
+ 
+ 
+while True:
+    msg = input('>> ')
+ 
+    encodedMessage = msg.encode('UTF-8','strict')
+ 
+    client_socket.send(encodedMessage)
+ 
+    answer_server = client_socket.recv(1024)
+ 
+    decodedResponse = answer_servera.decode('UTF-8')
+ 
+    print (decodedResponse)
+    
+------------------------------------------------------------------------------------------------------------
+from socket import*
+import calendar
+import sys
+ 
+host = '192.168.0.15'
+port=3210
+ 
+ 
+s = socket(AF_INET, SOCK_STREAM)
+s.bind((host, port))
+s.listen(1)
+ 
+ 
+ 
+client_sock, client_adr=s.accept()
+print ('Client ',client_adr,' is connect')
+dan=['1','2','3','4','5','6','7']
+while True:
+ 
+ 
+  encodedMessage = client_sock.recv(1024)
+  
+  message = encodedMessage.decode('UTF-8')
+  
+  ask=eval(message)
+  x = calendar.weekday(int(ask[0]),int(ask[1]),int(ask[2]))
+ 
+  z=day[x]
+ 
+  client_sock.send(str(z).encode('UTF-8'))
+ 
+s.close()
